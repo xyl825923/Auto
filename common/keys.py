@@ -62,16 +62,16 @@ class ApiKeys:
             "Content-Type": "application/json",
             "charset": "utf-8",
             "cache-control": "no-cache"
+            "ysSession":
         }
-        print(headers)
         if headers:
-            headers_list = headers.split('=')
-            size = 2
-            headers_lists = [headers_list[i * size:(i + 1) * size] for i in range(len(headers_list) - 1)]
-
-            # headers_dict = {}
-            # for i in range(len(headers_list) - 1):
-            #     headers_dict[headers_list[i]] = headers_dict[headers_list[i + 1]]
+            # headers_list = headers.split('=')
+            # size = 2
+            # headers_lists = [headers_list[i * size:(i + 1) * size] for i in range(len(headers_list) - 1)]
+            #
+            # # headers_dict = {}
+            # # for i in range(len(headers_list) - 1):
+            # #     headers_dict[headers_list[i]] = headers_dict[headers_list[i + 1]]
             base_headers.update( zip(headers_lists[0], headers_lists[1]))
         if read_conf('headers', 'ysSession'):
             ysSession = read_conf('headers', 'ysSession')

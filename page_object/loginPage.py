@@ -54,7 +54,7 @@ class LoginPage(BasePage):
         # for i in range(0, len(cookie_datas)-1):
         #     cookie_dict[cookie_datas[i]] = cookie_datas[i + 1]
         # print(cookie_dict)
-        read_conf.write_conf('headers', 'yssession',  cookie.split(";")[10])
+        read_conf.write_conf('headers', 'yssession',  cookie.split(";")[10].split("=")[1])
 
     # 登录成功断言
     def get_except_result_access(self):
