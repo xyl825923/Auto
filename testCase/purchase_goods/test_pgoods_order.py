@@ -94,5 +94,5 @@ class TestPurGoodsOrderApi:
             "checked": -1
         }
         requests.packages.urllib3.disable_warnings()
-        res = api.do_post(path='invPo.do?action=list', json=data)
+        res = api.do_post(path='invPo.do?action=list', data=data)
         print(res.text)
