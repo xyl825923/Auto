@@ -10,7 +10,6 @@ import time
 import allure
 import pytest
 
-
 from page_object.loginPage import LoginPage
 
 
@@ -23,7 +22,7 @@ class TestLogin():
     def test_login(self, beginandend):
         self.driver, self.logger = beginandend
         lp = LoginPage(self.driver)
-        lp.login_echop()
+        lp.get_cookie()
 
         # 断言
         # if '登录成功' in case_description:

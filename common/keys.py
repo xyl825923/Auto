@@ -29,7 +29,8 @@ class ApiKeys:
         # 请求头设置
         headers = self.set_headers(headers)
         # 发送请求
-        response = requests.get(url=url, headers=headers, params=params, **kwargs)
+        session = requests.session()
+        response = session.get(url=url, headers=headers, params=params, **kwargs, allow_redirects=False, verify=False)
         # 返回响应
         return response
 
@@ -38,11 +39,13 @@ class ApiKeys:
         url = self.set_url(path)
         # 请求头设置
         headers = self.set_headers(headers)
+        print(headers)
         # 发送请求
+        session = requests.session()
         if json == 1:
-            response = requests.post(url=url, headers=headers, json=data, **kwargs)
+            response = session.post(url=url, headers=headers, json=data, **kwargs, allow_redirects=False, verify=False)
         else:
-            response = requests.post(url=url, headers=headers, data=data, **kwargs)
+            response = session.post(url=url, headers=headers, data=data, **kwargs, allow_redirects=False, verify=False)
         # 返回响应
         return response
 
@@ -59,21 +62,14 @@ class ApiKeys:
         base_headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/114.0.0.0 Safari/537.36 ",
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "charset": "utf-8",
             "cache-control": "no-cache"
-            "ysSession":
         }
         if headers:
-            # headers_list = headers.split('=')
-            # size = 2
-            # headers_lists = [headers_list[i * size:(i + 1) * size] for i in range(len(headers_list) - 1)]
-            #
-            # # headers_dict = {}
-            # # for i in range(len(headers_list) - 1):
-            # #     headers_dict[headers_list[i]] = headers_dict[headers_list[i + 1]]
-            base_headers.update( zip(headers_lists[0], headers_lists[1]))
-        if read_conf('headers', 'ysSession'):
-            ysSession = read_conf('headers', 'ysSession')
-            base_headers['ysSession'] = ysSession
-        return headers
+            base_headers.update(headers)
+        if read_conf('headers', 'cookie'):
+            cookie = read_conf('headers', 'cookie')
+            base_headers['Cookie'] = cookie
+            base_headers['Referer'] = read_conf('envs', 'hzOnline')
+        return base_headers

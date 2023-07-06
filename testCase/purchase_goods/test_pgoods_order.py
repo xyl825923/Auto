@@ -7,6 +7,8 @@
 @Describe:
     购货订单
 """
+import requests
+
 from common.keys import ApiKeys
 from configs.read_conf import read_conf
 
@@ -73,5 +75,24 @@ class TestPurGoodsOrderApi:
         # headers = read_conf('headers', 'cookies')
         # print(headers)
         #
-        res = api.do_post(path='invPo.do?action=checkInvPo', data=data, headers=read_conf('headers', 'yssession'))
+        requests.packages.urllib3.disable_warnings()
+        res = api.do_post(path='invPo.do?action=checkInvPo', data=data)
+        print(res.text)
+
+    def test_pgOrderList(self):
+        api = ApiKeys()
+        data = {
+            "matchCon": "",
+            "beginDate": "2023-07-01",
+            "endDate": "2023-07-05",
+            "_search": False,
+            "nd": 1688553599636,
+            "rows": 100,
+            "page": 1,
+            "sord": "asc",
+            "billStatus": "",
+            "checked": -1
+        }
+        requests.packages.urllib3.disable_warnings()
+        res = api.do_post(path='invPo.do?action=list', json=data)
         print(res.text)

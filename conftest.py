@@ -8,7 +8,19 @@
 
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
 from common.logger_util import LoggerUtil
+
+
+#设置无头模式，不用打开浏览器
+def get_options():
+    chrome_options = Options()
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--headless")
+    return chrome_options
+
 
 
 @pytest.fixture(scope="session", autouse=True, name='beginandend')
@@ -17,7 +29,7 @@ def beginToend():
     logger = lu.get_logger()
     logger.info("----------测试用例执行开始----------")
     global driver
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(options=get_options())
     driver.maximize_window()
     yield (driver, logger)
     logger.info("----------测试用例执行结束----------\n")
