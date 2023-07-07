@@ -29,8 +29,7 @@ class ApiKeys:
         # 请求头设置
         headers = self.set_headers(headers)
         # 发送请求
-        session = requests.session()
-        response = session.get(url=url, headers=headers, params=params, **kwargs, allow_redirects=False, verify=False)
+        response = requests.get(url=url, headers=headers, params=params, **kwargs, allow_redirects=False, verify=False)
         # 返回响应
         return response
 
@@ -60,8 +59,7 @@ class ApiKeys:
     def set_headers(self, headers=None):
         # 设置通用的请求头信息用字典进行保存
         base_headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                          "Chrome/114.0.0.0 Safari/537.36 ",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67",
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "charset": "utf-8",
             "cache-control": "no-cache"

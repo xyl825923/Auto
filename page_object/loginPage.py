@@ -55,7 +55,7 @@ class LoginPage(BasePage):
         data = self.driver.get_cookies()
         print(data)
         cookie_data = [item["name"] + "=" + item["value"] for item in data]
-        cookie = ';'.join(item for item in cookie_data)
+        cookie = '; '.join(item for item in cookie_data)
         # 把cookie写入配置文件中
         read_conf.write_conf('headers', 'cookie', cookie)
 

@@ -76,9 +76,9 @@ class TestPurGoodsOrderApi:
         # print(headers)
         #
         requests.packages.urllib3.disable_warnings()
-        res = api.do_post(path='invPo.do?action=checkInvPo', data=data)
+        res = api.do_post(path='scm/invPo.do?action=checkInvPo', data=data)
         print(res.text)
-
+    #这个是查询，会有res的
     def test_pgOrderList(self):
         api = ApiKeys()
         data = {
@@ -94,5 +94,6 @@ class TestPurGoodsOrderApi:
             "checked": -1
         }
         requests.packages.urllib3.disable_warnings()
-        res = api.do_post(path='invPo.do?action=list', data=data)
+        res = api.do_post(path='scm/invPo.do?action=list', data=data)
         print(res.text)
+
